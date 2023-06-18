@@ -1,0 +1,82 @@
+USE [master]
+GO
+
+CREATE DATABASE [RezerwacjeDB]
+
+GO
+CREATE TABLE [dbo].[Clients](
+	[ClientID] [int] IDENTITY(1,1) NOT NULL,
+	[ClientFName] [varchar](50) NULL,
+	[ClientLName] [varchar](50) NULL,
+	[CPhone] [varchar](50) NOT NULL,
+	[CMail] [varchar](50) NULL,
+ CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED 
+(
+	[ClientID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Employees](
+	[EmployeeID] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeFName] [varchar](50) NULL,
+	[EmployeeLName] [varchar](50) NULL,
+	[Password] [varchar](50) NULL,
+	[Mail] [varchar](50) NULL,
+	[Phone] [varchar](50) NULL,
+	[IsAdmin] [bit] NULL,
+ CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Reservation](
+	[ReservationID] [int] IDENTITY(1,1) NOT NULL,
+	[IdRoom] [int] NULL,
+	[ClientID] [int] NULL,
+	[equipment] [bit] NULL,
+	[EmployeeID] [int] NULL,
+	[ReservationDate] [datetime] NULL,
+ CONSTRAINT [PK_Reservation] PRIMARY KEY CLUSTERED 
+(
+	[ReservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Rooms](
+	[IdRoom] [int] IDENTITY(1,1) NOT NULL,
+	[RoomName] [varchar](50) NULL,
+	[chairNumber] [int] NULL,
+	[equipment] [varchar](50) NULL,
+	[available] [bit] NULL,
+	[Price] [varchar](50) NULL,
+ CONSTRAINT [PK_Rooms] PRIMARY KEY CLUSTERED 
+(
+	[IdRoom] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Clients] ON 
+
+INSERT [dbo].[Clients] ([ClientID], [ClientFName], [ClientLName], [CPhone], [CMail]) VALUES (1, N'Jan', N'Kowalski', N'123456789', N'jankowalskiMail@com')
+SET IDENTITY_INSERT [dbo].[Clients] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Employees] ON 
+
+INSERT [dbo].[Employees] ([EmployeeID], [EmployeeFName], [EmployeeLName], [Password], [Mail], [Phone], [IsAdmin]) VALUES (1, N'Natalia', N'Pienczak', N'P@ssw0rd', N'NataliaMail@com', N'123456789', 1)
+SET IDENTITY_INSERT [dbo].[Employees] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Reservation] ON 
+
+INSERT [dbo].[Reservation] ([ReservationID], [IdRoom], [ClientID], [equipment], [EmployeeID], [ReservationDate]) VALUES (1, 2, 1, 1, 1, CAST(N'2023-06-17T00:00:00.000' AS DateTime))
+SET IDENTITY_INSERT [dbo].[Reservation] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Rooms] ON 
+
+INSERT [dbo].[Rooms] ([IdRoom], [RoomName], [chairNumber], [equipment], [available], [Price]) VALUES (1, N'weselna', 200, N'talerze', 1, N'300')
+INSERT [dbo].[Rooms] ([IdRoom], [RoomName], [chairNumber], [equipment], [available], [Price]) VALUES (4, N'Komunijna', 100, N'talerze', 1, N'150')
+SET IDENTITY_INSERT [dbo].[Rooms] OFF
+
